@@ -108,6 +108,20 @@ Mount the file to your app
 dokku storage:mount my-wordpress /var/lib/dokku/data/storage/my-wordpress/config/php-config.ini:/usr/local/etc/php/conf.d/99-php-config.ini
 ```
 
+### Configure Nginx (optional)
+
+First create the directory
+
+```bash
+# sudo mkdir /home/dokku/my-wordpress/nginx.conf.d/
+
+echo "client_max_body_size 128M;" | sudo tee /home/dokku/my-wordpress/nginx.conf.d/99-nginx.conf
+
+sudo chown -R dokku:dokku /home/dokku/my-wordpress/nginx.conf.d/
+
+dokku proxy:build-config my-wordpress
+```
+
 ### Deploy your app
 
 ```bash
