@@ -96,10 +96,15 @@ Create a file named `php-config.ini` with the following content:
 
 ```ini
 file_uploads = On
+upload_max_filesize = 512M
+post_max_size = 512M
+
+; Disable X-Powered-By
+expose_php = Off
+
+; Optional
 memory_limit = 256M
 max_execution_time = 300
-upload_max_filesize = 128M
-post_max_size = 128M
 ```
 
 Mount the file to your app
@@ -115,7 +120,7 @@ First create the directory
 ```bash
 # sudo mkdir /home/dokku/my-wordpress/nginx.conf.d/
 
-echo "client_max_body_size 128M;" | sudo tee /home/dokku/my-wordpress/nginx.conf.d/99-nginx.conf
+echo "client_max_body_size 512M;" | sudo tee /home/dokku/my-wordpress/nginx.conf.d/99-nginx.conf
 
 sudo chown -R dokku:dokku /home/dokku/my-wordpress/nginx.conf.d/
 
