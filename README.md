@@ -81,6 +81,12 @@ dokku proxy:ports-add my-wordpress http:80:80 https:443:80
 dokku proxy:build-config my-wordpress
 ```
 
+### Deploy your app
+
+```bash
+dokku git:from-image my-wordpress wordpress:6.1.1-php8.1
+```
+
 ### Configure PHP (optional)
 
 First create the directory
@@ -127,8 +133,19 @@ sudo chown -R dokku:dokku /home/dokku/my-wordpress/nginx.conf.d/
 dokku proxy:build-config my-wordpress
 ```
 
-### Deploy your app
+### Set up Object Cache (optional)
 
 ```bash
-dokku git:from-image my-wordpress wordpress:6.1.1-php8.1
+dokku redis:create my-wordpress-redis
+dokku redis:link my-wordpress-redis my-wordpress
+
+# Should look like this
+# redis://:<password>@<host>:<port>
+redis://:2b876b700dd27cefed31472985d9bb80bef49b5f71fded8361bcc2a8d6bb7990@dokku-redis-my-wordpress-redis:6379
 ```
+
+```bash
+dokku config:set my-wordpress WORDPRESS_CONFIG_EXTRA="define('WP_REDIS_HOST', 'REPLACE_ME'); define( 'WP_REDIS_PASSWORD', 'REPLACE_ME' );"
+```
+
+And then install the [Redis Object Cache](https://wordpress.org/plugins/redis-cache/) plugin.
