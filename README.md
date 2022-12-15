@@ -1,6 +1,6 @@
 # Dokku WordPress
 
-A simple guide to deploy WordPress on Dokku.
+A simple guide to deploy the [official WordPress docker image](https://hub.docker.com/_/wordpress) on Dokku.
 
 ## Installation
 
