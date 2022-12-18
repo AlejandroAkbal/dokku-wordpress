@@ -28,8 +28,8 @@ dokku mariadb:link my-wordpress-db my-wordpress
 dokku storage:ensure-directory my-wordpress
 
 # Create WordPress content directory
-sudo mkdir /var/lib/dokku/data/storage/amiwis/wp-content
-sudo chown -R dokku:dokku /var/lib/dokku/data/storage/amiwis/wp-content
+sudo mkdir /var/lib/dokku/data/storage/my-wordpress/wp-content
+sudo chown -R dokku:dokku /var/lib/dokku/data/storage/my-wordpress/wp-content
 ```
 
 ### Mount the storage to your app
