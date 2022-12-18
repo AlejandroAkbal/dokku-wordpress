@@ -87,6 +87,20 @@ dokku proxy:build-config my-wordpress
 dokku git:from-image my-wordpress wordpress:6.1.1-php8.1
 ```
 
+### Configure WordPress (optional)
+
+```bash
+dokku config:set my-wordpress WORDPRESS_CONFIG_EXTRA="
+/* Performance */
+define('WP_CACHE', true);
+define('COMPRESS_CSS', true);
+define('COMPRESS_SCRIPTS', true);
+define('CONCATENATE_SCRIPTS', false);
+define('ENFORCE_GZIP', true);
+/* WP */
+define('WP_POST_REVISIONS', false);"
+```
+
 ### Configure PHP (optional)
 
 First create the directory
@@ -145,7 +159,7 @@ redis://:2b876b700dd27cefed31472985d9bb80bef49b5f71fded8361bcc2a8d6bb7990@dokku-
 ```
 
 ```bash
-dokku config:set my-wordpress WORDPRESS_CONFIG_EXTRA="define('WP_REDIS_HOST', 'REPLACE_ME'); define( 'WP_REDIS_PASSWORD', 'REPLACE_ME' );"
+dokku config:set my-wordpress WORDPRESS_CONFIG_EXTRA="define('WP_REDIS_HOST', 'REPLACE_ME'); define( 'WP_REDIS_PASSWORD', 'REPLACE_ME');"
 ```
 
 And then install the [Redis Object Cache](https://wordpress.org/plugins/redis-cache/) plugin.
